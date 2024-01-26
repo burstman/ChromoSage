@@ -117,8 +117,7 @@ def main():
                 percent_yellow = st.slider(
                     "Percentage of Yellow (%)", 0, 100, 0)
 
-            target_value = f"{selected_target} ({percent_blue}% Blue, {percent_red}% Red, {
-                percent_yellow}% Yellow"
+            target_value = f"{selected_target} ({percent_blue}% Blue, {percent_red}% Red, {percent_yellow}% Yellow)"
         else:
             target_value = selected_target
 
