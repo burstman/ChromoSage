@@ -90,7 +90,7 @@ def main():
         with col9:
             delta_e = st.number_input("Delta(E)", min_value=0.0, step=0.1)
 
-        # Dropdown for selecting the target
+        # Dropdown for selecting the targets
         targets = [
             "passer_sans_aucune_correction",
             "passer_avec_savonnage_fort",
