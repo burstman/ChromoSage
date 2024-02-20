@@ -3,21 +3,21 @@ from sqlalchemy import text
 
 
 # Function to insert data into PostgreSQL
-def insert_into_postgres(insert_color, id_colori, couleur, id_type_tissu, numero_de_bain, delta_a, delta_b, delta_h, delta_l, delta_e, decisions, percent_red, percent_blue, percent_yellow, percent_black):
+def insert_into_postgres(insert_color, id_colori, couleur, id_type_tissu, nb_couleur_chroma, delta_a, delta_b, delta_h, delta_l, delta_e, decisions, percent_red, percent_blue, percent_yellow, percent_black):
 
     conn = st.connection("gather_db", type="sql")
 
     # Insert data into main_table
     with conn.session as session:
         sql_expression = text("""
-            INSERT INTO gathering (id_colori, couleur, id_type_de_tissu, numero_de_bain, delta_a, delta_b, delta_h, delta_l, delta_e, decisions)
+            INSERT INTO gathering (id_colori, couleur, id_type_de_tissu, nb_couleur_chromatique, delta_a, delta_b, delta_h, delta_l, delta_e, decisions)
             VALUES (:id_colori, :couleur, :id_type_de_tissu, :numero_de_bain, :delta_a, :delta_b, :delta_h, :delta_l, :delta_e, :decisions)
         """)
         session.execute(sql_expression, {
             'id_colori': id_colori,
             'couleur': couleur,
             'id_type_de_tissu': id_type_tissu,
-            'numero_de_bain': numero_de_bain,
+            'nb_couleur_chromatique': nb_couleur_chroma,
             'delta_a': delta_a,
             'delta_b': delta_b,
             'delta_h': delta_h,
@@ -72,7 +72,7 @@ def main():
         col4, col5, col6 = st.columns(3)
 
         with col4:
-            numero_de_bain = st.text_input("Numero_de_Bain")
+            nb_couleur = st.selectbox("Nombre de colorie",[1,2,3])
 
         with col5:
             delta_a = st.number_input("Delta(a)", step=0.1)
@@ -128,7 +128,7 @@ def main():
     if st.button("Submit"):
         try:
             # Insert data into PostgreSQL
-            insert_into_postgres(insertcolor, id_colori, couleur, id_type_tissu, numero_de_bain, delta_a,
+            insert_into_postgres(insertcolor, id_colori, couleur, id_type_tissu, nb_couleur, delta_a,
                                  delta_b, delta_h, delta_l, delta_e, decision_value, percent_red, percent_blue, percent_yellow, percent_black)
 
             st.success("Data saved successfully.")
