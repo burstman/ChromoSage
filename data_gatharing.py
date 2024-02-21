@@ -11,7 +11,7 @@ def insert_into_postgres(insert_color, id_colori, couleur, id_type_tissu, nb_cou
     with conn.session as session:
         sql_expression = text("""
             INSERT INTO gathering (id_colori, couleur, id_type_de_tissu, nb_couleur_chromatique, delta_a, delta_b, delta_h, delta_l, delta_e, decisions)
-            VALUES (:id_colori, :couleur, :id_type_de_tissu, :numero_de_bain, :delta_a, :delta_b, :delta_h, :delta_l, :delta_e, :decisions)
+            VALUES (:id_colori, :couleur, :id_type_de_tissu, :nb_couleur_chromatique, :delta_a, :delta_b, :delta_h, :delta_l, :delta_e, :decisions)
         """)
         session.execute(sql_expression, {
             'id_colori': id_colori,
